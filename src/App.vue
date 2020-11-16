@@ -1,17 +1,33 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>Labyrinth's game</h1>
+    <Labyrinth_selector :labyrinth_data="labyrinth_data" @labyrinth_chosen="labyrinthChosen"/>
+    <Labyrinth :labyrinth_data="selected_labyrinth"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+  import labyrinthData from "./data/labyrinthes"
+
+  import Labyrinth_selector from "./components/Labyrinth_selector";
+  import Labyrinth from "./components/Labyrinth";
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Labyrinth_selector,
+    Labyrinth
+  },
+  data: function(){
+    return {
+      labyrinth_data: labyrinthData,
+      selected_labyrinth: []
+    }
+  },
+  methods: {
+    labyrinthChosen: function(labyrinth){
+      this.selected_labyrinth = labyrinth;
+    }
   }
 }
 </script>
@@ -23,6 +39,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 40px;
 }
 </style>
